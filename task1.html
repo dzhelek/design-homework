@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Canvas</title>
+    </head>
+    <body>
+        <canvas id="can"></canvas>
+    </body>
+    <script>
+        // x, y, r - small circle
+        // X, Y, R - big circle
+        const x = 20 + 92 + 3;
+        const y = x - 10;
+        const R = y - 10;
+
+        const r = R * (Math.sqrt(2) - 1);
+        const X = x + r;
+        const Y = y;
+
+        var c = document.getElementById("can");
+        c.width = X + R + 1;
+        c.height = X + R + 1;
+        var ctx = c.getContext("2d");
+
+        // small circle
+        ctx.strokeStyle = "red"
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // big circle
+        ctx.strokeStyle = "blue"
+        ctx.beginPath();
+        ctx.arc(X, Y, R, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // triangle
+        ctx.strokeStyle = "black"
+        ctx.beginPath();
+        ctx.moveTo(X, Y - R);
+        ctx.lineTo(X - R, Y);
+        ctx.lineTo(X, Y + R);
+        ctx.lineTo(X, Y - R);
+        ctx.stroke();
+    </script>
+</html>
