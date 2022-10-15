@@ -22,25 +22,24 @@
         c.height = X + R + 1;
         var ctx = c.getContext("2d");
 
-        // small circle
-        ctx.strokeStyle = "red"
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, 2 * Math.PI);
-        ctx.stroke();
+        drawStroke("red", ctx, function (ctx) {
+            ctx.arc(x, y, r, 0, 2 * Math.PI);
+        });
+        drawStroke("blue", ctx, function (ctx) {
+            ctx.arc(X, Y, R, 0, 2 * Math.PI);
+        });
+        drawStroke("black", ctx, function (ctx) {
+            ctx.moveTo(X, Y - R);
+            ctx.lineTo(X - R, Y);
+            ctx.lineTo(X, Y + R);
+            ctx.lineTo(X, Y - R);
+        });
 
-        // big circle
-        ctx.strokeStyle = "blue"
-        ctx.beginPath();
-        ctx.arc(X, Y, R, 0, 2 * Math.PI);
-        ctx.stroke();
-
-        // triangle
-        ctx.strokeStyle = "black"
-        ctx.beginPath();
-        ctx.moveTo(X, Y - R);
-        ctx.lineTo(X - R, Y);
-        ctx.lineTo(X, Y + R);
-        ctx.lineTo(X, Y - R);
-        ctx.stroke();
+        function drawStroke(color, ctx, draw) {
+            ctx.strokeStyle = color;
+            ctx.beginPath();
+            draw(ctx);
+            ctx.stroke();
+        }
     </script>
 </html>
